@@ -43,20 +43,20 @@ def crawl(url, headers):
 
         
         #网页链接
-        url_movie = tag.find(attrs={"class":"hd"}).a
-        urls = url_movie.attrs['href']
-        print('[网页链接]', urls)
-        infofile.write("[网页链接]" + urls + "\r\n")
+        # url_movie = tag.find(attrs={"class":"hd"}).a
+        # urls = url_movie.attrs['href']
+        # print('[网页链接]', urls)
+        # infofile.write("[网页链接]" + urls + "\r\n")
 
-        #导演和演员信息
-        actors = tag.find(attrs={"class":"bd"}).p
-        actor_info=actors.get_text().replace(' ','').replace('\n',' ')
-        print('[制作信息]',actor_info)
-        print(actors.attrs['quote'].get_text())
+        # #导演和演员信息
+        # actors = tag.find(attrs={"class":"bd"}).p
+        # actor_info=actors.get_text().replace(' ','').replace('\n',' ')
+        # print('[制作信息]',actor_info)
+        # print(actors.attrs['quote'].get_text())
 
-        urls = actors.attrs['href']
-        print('[网页链接]', urls)
-        infofile.write("[网页链接]" + urls + "\r\n")
+        # urls = actors.attrs['href']
+        # print('[网页链接]', urls)
+        # infofile.write("[网页链接]" + urls + "\r\n")
         
         # #爬取评分和评论数
         info = tag.find(attrs={"class":"star"}).get_text()
