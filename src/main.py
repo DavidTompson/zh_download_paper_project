@@ -4,27 +4,23 @@ import urllib.request
 import re 
 from bs4 import BeautifulSoup
 import codecs
+#  参考这篇文章：https://cloud.tencent.com/developer/article/2304559
 
-#-------------------------------------爬虫函数-------------------------------------
+
+
 def crawl(url, headers):
 
-    print('爬取豆瓣电影250: \n')
-    request = urllib.request.Request(url='https://movie.douban.com/top250', headers=headers)
+    request = urllib.request.Request(url=url, headers=headers)
     response = urllib.request.urlopen(request)
     contents = response.read().decode('utf-8')
-                                       
-    # print('爬取豆瓣电影250: \n')
-    # page = urllib.request.Request(url, headers=headers)
-    # page = urllib.request.urlopen(page)
-    # contents = page.read()
-    
+                                      
     soup = BeautifulSoup(contents, "html.parser") 
     infofile.write("")
 
     
     for tag in soup.find_all(attrs={"class":"item"}):
         #爬取序号
-        num = tag.find('em').get_text()
+        num = tag.find('gs_or_ggsm').get_text()
         print(num)
         infofile.write(num + "\r\n")
         
@@ -74,21 +70,21 @@ def crawl(url, headers):
         
 
 
-#-------------------------------------主函数-------------------------------------
+#-020------------------------------------主函数-------------------------------------
 if __name__ == '__main__':
     print("hello")
     #存储文件
-    infofile = codecs.open("Result_Douban.txt", 'a', 'utf-8')
+    infofile = codecs.open("论文列表.txt", 'a', 'utf-8')
     
-    #消息头
     headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"}
 
-    #翻页
     i = 0
+    # gs_or_ggsm   .a
+    keyword='SLAM'
     while i<10:
         print('页码', (i+1))
         num = i*25 #每次显示25部 URL序号按25增加
-        url = 'https://movie.douban.com/top250?start=' + str(num) + '&filter='
+        url = 'https://scholar.google.com/scholar?start='+str(num)+'hl=zh-CN&as_sdt=0%2C29&q=+'+keyword+'+&oq='
         crawl(url, headers)
         infofile.write("\r\n\r\n")
         i = i + 1

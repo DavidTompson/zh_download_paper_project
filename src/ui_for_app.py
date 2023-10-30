@@ -1,0 +1,4 @@
+
+class UIforApp:
+    def __init__(self) -> None:
+        pass
